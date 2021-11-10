@@ -19,6 +19,10 @@ const HomeScreen = () => {
         title="Go to About"
         onPress={() => navigation.navigate("About")}
       />
+      <Button
+        title="Go to SignIn"
+        onPress={() => navigation.navigate("SignIn")}
+      />
     </SafeAreaView>
   );
 };
