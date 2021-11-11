@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+
+// Form Components
+import LoginForm from "../Components/LoginForm";
+import RegisterForm from "../Components/RegisterForm";
 
 const SignInScreen = () => {
   return (
     <View>
-      <Text>I am the SignInScreen</Text>
+      {/* <LoginForm /> */}
+      <RegisterForm />
     </View>
   );
 };

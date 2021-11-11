@@ -1,29 +1,38 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { IconButton } from "react-native-paper";
+import tw from "tailwind-react-native-classnames";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Welcome Home",
+      headerRight: () => (
+        <IconButton
+          icon="account-circle"
+          size={25}
+          color="#fff"
+          onPress={() => navigation.push("About")}
+          // color="red"
+        />
+      ),
+      headerLeft: () => (
+        <IconButton
+          icon="login"
+          size={20}
+          color="#fff"
+          onPress={() => navigation.push("SignIn")}
+        />
+      ),
+    });
+  }, [navigation]);
   return (
-    <SafeAreaView>
-      <Text>I am the HomeScreen</Text>
-      <Text>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga
-        blanditiis recusandae nisi amet laudantium molestias, harum cumque!
-        Expedita, officia beatae doloribus at ipsum maxime blanditiis nemo
-        molestias corporis tenetur quaerat provident rerum totam quae eligendi.
-        Eos facilis veniam unde!z
-      </Text>
-      <Button
-        title="Go to About"
-        onPress={() => navigation.navigate("About")}
-      />
-      <Button
-        title="Go to SignIn"
-        onPress={() => navigation.navigate("SignIn")}
-      />
-    </SafeAreaView>
+    <ScrollView>
+      <Text style={tw`text-center text-3xl mt-5`}>HackerNews</Text>
+    </ScrollView>
   );
 };
 

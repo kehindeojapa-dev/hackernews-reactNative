@@ -1,8 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import { Provider as PaperProvider } from "react-native-paper";
-import { NavigationContainer } from "@react-navigation/native";
+import { StyleSheet, Text, View, SafeAreaView, Button } from "react-native";
+import {
+  Provider as PaperProvider,
+  Colors,
+  IconButton,
+} from "react-native-paper";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -16,6 +20,7 @@ import AboutScreen from "./Screens/AboutScreen";
 import SignInScreen from "./Screens/SignInScreen";
 
 const Stack = createNativeStackNavigator();
+console.log("Something");
 
 export default function App() {
   return (
@@ -27,14 +32,50 @@ export default function App() {
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{ headerShown: false }}
+                options={{
+                  headerShown: true,
+                  // title: "Welcome",
+                  headerTitleAlign: "center",
+                  headerStyle: {
+                    backgroundColor: "#f4511e",
+                  },
+                  headerTintColor: "#fff",
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                    fontSize: 30,
+                  },
+                }}
               />
               <Stack.Screen
                 name="About"
                 component={AboutScreen}
-                options={{ headerShown: false }}
+                options={{
+                  headerShown: true,
+                  title: "Whoami",
+                  headerStyle: {
+                    backgroundColor: "#f4511e",
+                  },
+                  headerTintColor: "#fff",
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                  },
+                }}
               />
-              <Stack.Screen name="SignIn" component={SignInScreen} />
+              <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+                options={{
+                  headerShown: true,
+                  title: "Sign In",
+                  headerStyle: {
+                    backgroundColor: "#f4511e",
+                  },
+                  headerTintColor: "#fff",
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                  },
+                }}
+              />
             </Stack.Navigator>
           </PaperProvider>
         </SafeAreaProvider>
