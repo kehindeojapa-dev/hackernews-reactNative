@@ -20,7 +20,6 @@ import AboutScreen from "./Screens/AboutScreen";
 import SignInScreen from "./Screens/SignInScreen";
 
 const Stack = createNativeStackNavigator();
-console.log("Something");
 
 export default function App() {
   return (
@@ -42,7 +41,7 @@ export default function App() {
                   headerTintColor: "#fff",
                   headerTitleStyle: {
                     fontWeight: "bold",
-                    fontSize: 30,
+                    fontSize: 20,
                   },
                 }}
               />

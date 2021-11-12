@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  username: null,
+  username: "",
 };
 
 export const dataLayer = createSlice({
   name: "user",
   initialState,
-  reducer: {
+  reducers: {
     setUsername: (state, action) => {
-      state.origin = action.payload;
+      state.username = action.payload;
     },
   },
 });

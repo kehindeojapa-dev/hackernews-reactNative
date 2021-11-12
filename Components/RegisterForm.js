@@ -1,9 +1,17 @@
 import React, { createRef, useState, useEffect } from "react";
 import { ScrollView, StyleSheet, View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { HelperText, TextInput, Button } from "react-native-paper";
 import tw from "tailwind-react-native-classnames";
+import * as SQLite from "expo-sqlite";
+import { useDispatch } from "react-redux";
+import { setUsername } from "../Redux/userData";
 
-const RegisterForm = () => {
+const db = SQLite.openDatabase("db.userDB");
+
+const RegisterForm = ({ setShow }) => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,13 +20,61 @@ const RegisterForm = () => {
   const [passwordValid, setPasswordValid] = useState(true);
 
   const [registerBtn, setRegisterBtn] = useState(true);
+  const [registerStatus, setRegisterStatus] = useState(false);
 
   let nameInputRef = createRef();
   let passwordInputRef = createRef();
 
+  const createTable = () => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "CREATE TABLE IF NOT EXISTS " +
+          "User " +
+          "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Password TEXT);"
+      );
+    });
+  };
+
   const registerUser = () => {
     if (password.length >= 5 && name.length > 0) {
-      alert(name);
+      createTable();
+      // Check for length
+      db.transaction((tx) => {
+        tx.executeSql("SELECT * FROM User", [], (tx, results) => {
+          if (results.rows.length === 1) {
+            tx.executeSql(
+              "UPDATE User SET Name=?, Password=?",
+              [name.toLowerCase(), password],
+              (tx, result) => {
+                if (result) {
+                  dispatch(setUsername(name));
+                  setRegisterStatus(true);
+                  setTimeout(() => {
+                    setRegisterStatus(false);
+                    navigation.navigate("Home");
+                  }, 500);
+                }
+              }
+            );
+          } else if (results.row.length === 0) {
+            tx.executeSql(
+              "INSERT INTO User (Name, Password) VALUES(?,?)",
+              [name, password],
+              (tx, result) => {
+                if (result) {
+                  setRegisterStatus(true);
+                  dispatch(setUsername(name));
+                  setTimeout(() => {
+                    setRegisterStatus(false);
+                    navigation.navigate("Home");
+                  }, 500);
+                }
+              }
+            );
+          }
+        });
+      });
+      // dispatch(setUsername());
     }
   };
 
@@ -90,8 +146,18 @@ const RegisterForm = () => {
       >
         Register
       </Button>
+      <HelperText type="info" visible={registerStatus}>
+        Registration Successful
+      </HelperText>
+      <View style={styles.row}>
+        <Text style={tw`text-right text-base`}>
+          Registered already, go to{" "}
+          <Text style={tw`text-2xl text-red-400`} onPress={() => setShow(true)}>
+            Login
+          </Text>
+        </Text>
+      </View>
     </ScrollView>
-    // </TextInputContainer>
   );
 };
 
