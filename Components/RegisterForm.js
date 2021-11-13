@@ -12,16 +12,25 @@ const db = SQLite.openDatabase("db.userDB");
 const RegisterForm = ({ setShow }) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  // State for username and password
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+  // State for the eye icon and showing password
   const [showPassword, setShowPassword] = useState(false);
+
+  // State for handling inputs validation
   const [nameValid, setNameValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
 
+  // State for enabling/disabling the registerBtn depending on the inputs values
   const [registerBtn, setRegisterBtn] = useState(true);
+
+  // State for displaying signin status
   const [registerStatus, setRegisterStatus] = useState(false);
 
+  // State for tabindexing inputs field
   let nameInputRef = createRef();
   let passwordInputRef = createRef();
 
@@ -105,6 +114,7 @@ const RegisterForm = ({ setShow }) => {
           returnKeyType={"next"}
           value={name}
           onChangeText={(text) => setName(text)}
+          // Checker for input validation, activates the helper text if there is an error
           onBlur={() => setNameValid(name.length > 0)}
           activeOutlineColor="#f4511e"
         />
@@ -130,6 +140,7 @@ const RegisterForm = ({ setShow }) => {
           returnKeyType={"next"}
           value={password}
           onChangeText={(text) => setPassword(text)}
+          // Checker for input validation, activates the helper text if there is an error
           onBlur={() => setPasswordValid(password.length >= 5)}
           activeOutlineColor="#f4511e"
         />
@@ -146,13 +157,19 @@ const RegisterForm = ({ setShow }) => {
       >
         Register
       </Button>
+      {/* Helper Text activated when registerStatus get a true value from the database query */}
       <HelperText type="info" visible={registerStatus}>
         Registration Successful
       </HelperText>
       <View style={styles.row}>
         <Text style={tw`text-right text-base`}>
-          Registered already, go to{" "}
-          <Text style={tw`text-2xl text-red-400`} onPress={() => setShow(true)}>
+          Registered already, go to // onPress function updates the parent
+          component show state
+          <Text
+            style={tw`text-2xl text-red-400`}
+            // onPress function updates the parent component show state
+            onPress={() => setShow(true)}
+          >
             Login
           </Text>
         </Text>

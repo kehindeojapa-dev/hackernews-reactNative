@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { IconButton } from "react-native-paper";
 import tw from "tailwind-react-native-classnames";
+import HackerNews from "../Components/Hackernews";
 import * as SQLite from "expo-sqlite";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUsername, setUsername } from "../Redux/userData";
@@ -62,11 +63,7 @@ const HomeScreen = () => {
       ),
     });
   }, [navigation, username]);
-  return (
-    <ScrollView>
-      <Text style={tw`text-center text-3xl mt-5`}>HackerNews</Text>
-    </ScrollView>
-  );
+  return <HackerNews />;
 };
 
 export default HomeScreen;

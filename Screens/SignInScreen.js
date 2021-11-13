@@ -13,6 +13,9 @@ const SignInScreen = () => {
   const username = useSelector(selectUsername);
 
   useEffect(() => {
+    // Check to see if there is an existing username.
+    // if it exist, it shows loginScreen and if it doesn't exist
+    // it shows the registerScreen with the use of the show State.
     if (username) {
       setShow(true);
     }
