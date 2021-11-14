@@ -11,14 +11,14 @@ const getStory = async (id) => {
   }
 };
 
-export const getStories = async () => {
+export const getStories = async (init, final) => {
   try {
     const { data: storyIds } = await axios.get(
       `${BASE_API_URL}/topstories.json`
     );
     const stories = await Promise.all(
       // storyIds.slice(0, storyIds.length).map(getStory)
-      storyIds.slice(0, 30).map(getStory)
+      storyIds.slice(init, final).map(getStory)
     );
     return stories;
   } catch (error) {

@@ -18,6 +18,7 @@ import { store } from "./Redux/store";
 import HomeScreen from "./Screens/HomeScreen";
 import AboutScreen from "./Screens/AboutScreen";
 import SignInScreen from "./Screens/SignInScreen";
+import WebScreen from "./Screens/WebScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -66,6 +67,21 @@ export default function App() {
                 options={{
                   headerShown: true,
                   title: "Sign In",
+                  headerStyle: {
+                    backgroundColor: "#f4511e",
+                  },
+                  headerTintColor: "#fff",
+                  headerTitleStyle: {
+                    fontWeight: "bold",
+                  },
+                }}
+              />
+              <Stack.Screen
+                name="Web"
+                component={WebScreen}
+                options={{
+                  headerShown: true,
+                  title: "Browser",
                   headerStyle: {
                     backgroundColor: "#f4511e",
                   },

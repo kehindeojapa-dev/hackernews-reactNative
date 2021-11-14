@@ -163,13 +163,9 @@ const RegisterForm = ({ setShow }) => {
       </HelperText>
       <View style={styles.row}>
         <Text style={tw`text-right text-base`}>
-          Registered already, go to // onPress function updates the parent
-          component show state
-          <Text
-            style={tw`text-2xl text-red-400`}
-            // onPress function updates the parent component show state
-            onPress={() => setShow(true)}
-          >
+          Registered already, go to{" "}
+          {/* onPress function updates the parent componentshow state */}
+          <Text style={tw`text-2xl text-red-400`} onPress={() => setShow(true)}>
             Login
           </Text>
         </Text>
