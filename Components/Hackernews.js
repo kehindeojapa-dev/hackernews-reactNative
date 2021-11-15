@@ -55,7 +55,7 @@ const Hackernews = () => {
 
   if (error) {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Error: {error.message}</Text>
       </View>
     );

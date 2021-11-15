@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { BASE_API_URL } from './constants';
 const BASE_API_URL = "https://hacker-news.firebaseio.com/v0";
 
 const getStory = async (id) => {

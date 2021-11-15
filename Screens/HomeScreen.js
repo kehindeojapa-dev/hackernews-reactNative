@@ -13,7 +13,6 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const username = useSelector(selectUsername);
-  console.log(username);
 
   const greeting = (username) => {
     const myDate = new Date();
